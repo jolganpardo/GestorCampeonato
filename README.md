@@ -1,4 +1,4 @@
 # GestorCampeonato
-# Colaboradore:
+## Colaboradores:
 - Jolgan Pardo
 - Yisus Olarte
