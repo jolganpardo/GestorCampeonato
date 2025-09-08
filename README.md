@@ -132,3 +132,36 @@ interface Reportable {
     void generarReporte();
 }
 
+## 5. Principio DIP
+"Los módulos de alto nivel no deben depender de los de bajo nivel; ambos deben depender de abstracciones."
+
+### Violacion
+En nuestro caso la clase GestorCampeonato depende directamente de clases concretas de *bajo nivel* como ReporteTexto y ReporteHTML que son las que generan el reporte en consola.
+
+--- 
+
+Codigo antes de refactorizar con *SOLID*
+
+if (formato.equalsIgnoreCase("TEXTO")) {
+    ReporteTexto r = new ReporteTexto();
+    r.generar(equipos, arbitros);
+} else if (formato.equalsIgnoreCase("HTML")) {
+    ReporteHTML r = new ReporteHTML();
+    r.generar(equipos, arbitros);
+}
+
+---
+
+Despues de refactorizar con *SOLID*
+
+public class GestorCampeonato {
+    private Reporte reporte;
+
+    public GestorCampeonato(Reporte reporte) {
+        this.reporte = reporte;
+    }
+
+    public void generarReporte(List<Equipo> equipos, List<Arbitro> arbitros) {
+        reporte.generar(equipos, arbitros);
+    }
+}
